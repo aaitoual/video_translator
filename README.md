@@ -2,74 +2,32 @@
 
 ![python](https://img.shields.io/static/v1?label=Python&labelColor=07a0f8&message=v3.8.10&color=000000&logo=python&logoColor=ffffff&style=flat-square)
 ![python](https://img.shields.io/static/v1?label=pytube&labelColor=dd3838&message=v12.1.0&color=000000&logo=python&logoColor=ffffff&style=flat-square)
-![](https://img.shields.io/static/v1?label=AssemblyAI&labelColor=7335da&message=+v2&color=000000&logo=&logoColor=ffffff&style=flat-square)
-![Python](https://img.shields.io/static/v1?label=deep_translator&labelColor=7335da&message=+v1.9.1&color=000000&logo=Python&logoColor=ffffff&style=flat-square)
 ![azure ](https://img.shields.io/static/v1?label=Azure+TTS&labelColor=0778ba&message=+v3.0&color=000000&logo=azure+&logoColor=ffffff&style=flat-square)
 
-Have you ever thought about translate a YouTube video? That is the idea for this project. 
-
-
-### Dependencies and API Integrations: 
-<br>
-
-
-|  **module**    | **version**  | **link**    
-|:----------:|:----------:| :-----------------
-| **pytube**     | v12.1.0 |  [documentation](https://pytube.io/en/latest/)
-| **deep_translator** | v1.9.1 | [documentation](https://deep-translator.readthedocs.io/en/latest/)
-| **pymovie** | v1.0.2  | [documentation](https://zulko.github.io/moviepy/)
-
-
-<br>
-
-
-|  **api**    | **version** | **link**   
-|:----------:|:----------:| :--------
-| **AssemblyAI**     | v2 | [AssemblyAI Speech to Text](https://assemblyai.com/)
-| **Azure TTS Service** | v3 | [Azure Text to Speech](https://azure.microsoft.com/en-us/products/cognitive-services/text-to-speech/#overview)
-
-
-
+A simplee and quick projecet about translating youtube shorts (working for casual and story shorts with no visual content)
 
 ### Basic usage:
 
 
 ~~~bash
-    python3 video-translate/video-translate.py
+    python3 translator/shorts-translator.py
 ~~~
 
 <br>
 
-### How it works?
+### How it works? SIMPLE: 
 
 <br>
-
-Consuming a set of python modules, a speech-to-text api from AssemblyAI and the Azure text-to-speech service, the video-translate system downloads the video with the pytube module based on its url, which must be entered by the user. 
-
-When the download is finished, the pymovie module is called to create an .mp3 file from the downloaded .mp4. 
-
-When the file creation is finished, the api for AssemblyAI's text-to-speech service is requested, sending the .mp3 file as data, the api returns a text containing what is said in the audio.
-
-With the speech-to-text process finished and the AssemblyAI api returned, the Translate module is now called so that the text translation can take place with deep_translator.
-
-With the translation of the text said in the audio finished, the Azure text-to-speech service is now called so that the translation can become an audio mp3. 
-
-With the audio mp3 translation created, now moviepy is called again so that it can replace the original audio, with the translated audio.
-
-**Below you can see a flowchart of how the translation is done:**
+    After downloading the youtube short provided by the link in the "links.txt" file, the program will substract the audio from that video and save it
+    Then it will be uploaded to your azure storage container so it can be used to be transcribed (for short videos, i mean really short videos, ther's a simple way to skip this step and avoid using azure storage)
+    Then the program will craete a transcription request and wait for it to finish and get the text
+    Then using azure translator service the program will translate the text to the desired language from the desired language (from en to fr in the default case, please check the supported languages here <link> https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt </link>)
+    Then using the speech service again, the program will convert the translated text to a voice
+    then we upload the new voice again to get the new translated text with the times to save it as an srt file for subtitle
+    Then the program will cut a random chunk from the "path_to_the_directery/translator/resources/video_background.mp4" video and add the audio to it then save it
+    Then all the files will be moved to /results folder
 <br>
-
-
-<p align="center" width="100%">
-    <img width="33%" heigth="40%" src="./images/how_it_works.png"> 
-</p>
 
 
 <br>
 <br>
-
-### Supported languages:
-
-  * Portuguese
-
-Note: english to spanish comming soon
