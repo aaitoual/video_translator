@@ -20,11 +20,17 @@ A simplee and quick projecet about translating youtube shorts (working for casua
 <br>
     After downloading the youtube short provided by the link in the "links.txt" file, the program will substract the audio from that video and save it
     Then it will be uploaded to your azure storage container so it can be used to be transcribed (for short videos, i mean really short videos, ther's a simple way to skip this step and avoid using azure storage)
+    <br>
     Then the program will craete a transcription request and wait for it to finish and get the text
+    <br>
     Then using azure translator service the program will translate the text to the desired language from the desired language (from en to fr in the default case, please check the supported languages here <link> https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt </link>)
+    <br>
     Then using the speech service again, the program will convert the translated text to a voice
-    then we upload the new voice again to get the new translated text with the times to save it as an srt file for subtitle
+    <br>
+    Then we upload the new voice again to get the new translated text with the times to save it as an srt file for subtitle
+    <br>
     Then the program will cut a random chunk from the "path_to_the_directery/translator/resources/video_background.mp4" video and add the audio to it then save it
+    <br>
     Then all the files will be moved to /results folder
 <br>
 
